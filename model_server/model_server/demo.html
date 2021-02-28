@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <title>demo</title>
+  </head>
+  <body>
+    <h1>select an image!</h1>
+    <div class="input-group mb-3">
+      <input type="file" class="form-control" id="image">
+      <button class="btn btn-outline-secondary" type="button" id="submit">submit</button>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+  <script>
+    var ready = (callback) => {
+      if (document.readyState != "loading") callback();
+      else document.addEventListener("DOMContentLoaded", callback);
+    }
+
+    ready(() => {
+      document.querySelector("#submit").addEventListener("click", e => {
+        const formData = new FormData();
+        const fileField = document.querySelector('#image');
+        formData.append('file_upload', fileField.files[0]);
+
+        fetch('/api', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json()).then(json => alert(json))
+      });
+    });
+  </script>
+</html>

@@ -1,0 +1,7 @@
+env/
+.idea/
+*.pyc
+*.h5
+*.jpeg
+*.jpg
+*.png
